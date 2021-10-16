@@ -15,23 +15,23 @@ containers. Nevertheless a k8 may be used just fine.
 1. Before doing anything, make sure the custom images are build so it can start
 with no issues.
 
-    $ docker-compose build
+        kong$ docker-compose build
 
 2. If it is the first time the aplication is being built, a migration is needed
 on the postgres database. It bootstrap kong on the database. Start by running:
 
-    $ docker-compose run kong-migrations
+        kong$ docker-compose run kong-migrations
 
 3. Start kong by running the kong service, the others services such as apis and
 database will start right way.
 
-    $ docker-compose run kong
+        kong$ docker-compose run kong
 
 4. If modifications are done on the kong.yaml, run the syncronization service,
 deck is used to do that. Be aware to have kong running before run the command
 bellow.
 
-    $ docker-compose run deck
+        kong$ docker-compose run deck
 
 ## Authorization on the API Gateway
 
