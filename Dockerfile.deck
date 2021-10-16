@@ -1,0 +1,3 @@
+FROM kong/deck:v1.8.1
+
+WORKDIR /home/deckuser/

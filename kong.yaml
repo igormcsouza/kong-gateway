@@ -1,0 +1,44 @@
+_format_version: "2.1"
+
+services:
+  - name: api
+    url: http://api:8546
+    routes:
+      - name: time
+        paths:
+          - /api/time
+      - name: date
+        paths:
+          - /api/date
+      - name: timezone
+        paths:
+          - /api/get_timezones
+      - name: docs
+        paths:
+          - /openapi.json
+          - /docs
+  - name: app
+    url: http://app:8547
+    routes:
+      - name: main
+        paths:
+          - /
+
+plugins:
+  - name: rate-limiting
+    service: api
+    config:
+      minute: 5
+      policy: local
+  - name: jwt
+    service: api
+    config: 
+      secret_is_base64: false
+      run_on_preflight: true
+
+consumers:
+  - username: igorsouza
+    jwt_secrets:
+      - key: mysupersecretkey
+        algorithm: HS256
+        secret: mysupersecretpass
